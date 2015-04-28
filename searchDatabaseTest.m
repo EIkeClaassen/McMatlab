@@ -1,0 +1,1 @@
+%should be the Testrun of the searchDatabase function
