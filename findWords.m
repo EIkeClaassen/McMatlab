@@ -1,7 +1,7 @@
 function foundWords = findWords (loadedWords,searchedWords)
 %FINDWORDS Summary of this function goes here
 
-    if ~ischar(searchedWords) || strcmp(searchedWords, '')
+    if ~ischar(searchedWords) || strcmp(searchedWords, '') || isempty(searchedWords)
         foundWords = true;
     else
         NumberOfMatches = 0;

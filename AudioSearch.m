@@ -22,7 +22,7 @@ function varargout = AudioSearch(varargin)
 
 % Edit the above text to modify the response to help AudioSearch
 
-% Last Modified by GUIDE v2.5 26-Apr-2015 18:53:51
+% Last Modified by GUIDE v2.5 28-Apr-2015 16:31:07
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -83,6 +83,7 @@ function popupMenuGender_Callback(hObject, eventdata, handles)
 %        contents{get(hObject,'Value')} returns selected item from popupMenuGender
 
 
+
 % --- Executes during object creation, after setting all properties.
 function popupMenuGender_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to popupMenuGender (see GCBO)
@@ -120,18 +121,18 @@ end
 
 
 
-function editDirection_Callback(hObject, eventdata, handles)
-% hObject    handle to editDirection (see GCBO)
+function editDirectory_Callback(hObject, eventdata, handles)
+% hObject    handle to editDirectory (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of editDirection as text
-%        str2double(get(hObject,'String')) returns contents of editDirection as a double
+% Hints: get(hObject,'String') returns contents of editDirectory as text
+%        str2double(get(hObject,'String')) returns contents of editDirectory as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function editDirection_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to editDirection (see GCBO)
+function editDirectory_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editDirectory (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -147,12 +148,8 @@ function pushButtonLoadData_Callback(hObject, eventdata, handles)
 % hObject    handle to pushButtonLoadData (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-direction = get(handles.editDirection,'String');
-if strcmp(direction,'')
-    direction = '';
-end
+direction = get(handles.editDirectory,'String');
 loadDatabase(direction);
-
 
 
 function editPhonems_Callback(hObject, eventdata, handles)
@@ -224,12 +221,32 @@ end
 
 
 % --- Executes on button press in pushButtonSearchData.
-function pushButtonSearchData_Callback(~, ~, handles)
+function pushButtonSearchData_Callback(hObject, eventdata, handles)
 % hObject    handle to pushButtonSearchData (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+%get(handles.listboxResults,'String')
+gender = handles.popupMenuGender.String(handles.popupMenuGender.Value)
+person = handles.popupMenuName.String(handles.popupMenuName.Value)
+sentenceID = handles.editSentenceID.String
+word = handles.editWord.String
+phonem = handles.editPhonems.String
+if strcmp(gender,'Female')
+    gender = 'f';
+elseif strcmp(gender,'Male')
+    gender = 'm';
+end
 
+results = searchDatabase(gender,person{1},sentenceID,word,phonem)
+%expression = [];
+directory = {};
+for i=1:length(results)
+    %expression = [expression;regexprep(results{i}.Filename,'wav','txt','once')]
+    directory = [directory; results{i}.Filename];
+end
+
+set(handles.listboxResults,'String', directory)
 
 
 % --- Executes on selection change in listboxResults.
@@ -255,11 +272,13 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
+
 % --- Executes on button press in pushButtonPlay.
 function pushButtonPlay_Callback(hObject, eventdata, handles)
 % hObject    handle to pushButtonPlay (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+handles.listboxResults
 
 
 % --- Executes on button press in pushButtonStopp.
@@ -269,7 +288,7 @@ function pushButtonStopp_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton7.
+% --- Executes on button press in pushbutton10
 function pushbutton7_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton7 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB

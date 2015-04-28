@@ -7,7 +7,6 @@ classdef AudioFile
         Fs
         Channels
         NBits
-        Player
     end
     
     methods
@@ -51,10 +50,6 @@ classdef AudioFile
         
         function play(obj)
             sound(obj.read(), obj.Fs, obj.NBits)
-        end
-        
-        function Player = createPlayer(obj)
-            Player = audioplayer(obj.read(),obj.Fs,obj.NBits);
         end
     end
 end

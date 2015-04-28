@@ -16,9 +16,9 @@ global database
     
     for i=1:length(loadedDatabase)
         if findGender(loadedDatabase{i,2}{1,1},Gender) && findPerson(loadedDatabase{i,3}{1,1},Person) && findSentenceID(loadedDatabase{i,4}{1,1},SentenceID) && findWords(loadedDatabase{i,5}{1,1},Words) && findPhonems(loadedDatabase{i,6}{1,1},Phonems)
-            %audioFileDirectory = [audioFileDirectory;loadedDatabase{i,1}];
-            
-            resultingAudioFiles = [resultingAudioFiles; AudioPlayer(loadedDatabase{i,1}{1,1})];
+
+            %resultingAudioFiles = [resultingAudioFiles; AudioFile(loadedDatabase{i,1}{1,1})];
+            resultingAudioFiles = [resultingAudioFiles; {AudioPlayer(loadedDatabase{i,1}{1,1})}];
         end
     end  
 end

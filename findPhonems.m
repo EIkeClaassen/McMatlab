@@ -1,7 +1,7 @@
 function foundPhonems = findPhonems(loadedPhonems, searchedPhonems)
 %FINDPHONEMS Summary of this function goes here
 
-    if ~ischar(searchedPhonems) || strcmp(searchedPhonems, '')
+    if ~ischar(searchedPhonems) || strcmp(searchedPhonems, '') || isempty(searchedPhonems)
         foundPhonems = true;
     else
         NumberOfMatches = 0;
