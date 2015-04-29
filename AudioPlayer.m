@@ -21,8 +21,5 @@ classdef AudioPlayer
         function Player = createPlayer(obj)
             Player = audioplayer(obj.Data,obj.Fs,obj.NBits);
         end
-    
     end
-    
-    
 end

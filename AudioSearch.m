@@ -238,15 +238,8 @@ elseif strcmp(gender,'Male')
     gender = 'm';
 end
 
-results = searchDatabase(gender,person{1},sentenceID,word,phonem)
-%expression = [];
-directory = {};
-for i=1:length(results)
-    %expression = [expression;regexprep(results{i}.Filename,'wav','txt','once')]
-    directory = [directory; results{i}.Filename];
-end
-
-set(handles.listboxResults,'String', directory)
+results = searchDatabase(gender,person{1},sentenceID,word,phonem);
+set(handles.listboxResults,'String', results)
 
 
 % --- Executes on selection change in listboxResults.
@@ -278,9 +271,10 @@ function pushButtonPlay_Callback(hObject, eventdata, handles)
 % hObject    handle to pushButtonPlay (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.listboxResults
-
-
+directory  = handles.listboxResults.String(handles.listboxResults.Value);
+Player = AudioFile(directory{1});
+%sound(Player.Data,Player.Fs,Player.NBits)
+Player.play();
 
 % --- Executes on button press in pushButtonStopp.
 function pushButtonStopp_Callback(hObject, eventdata, handles)
