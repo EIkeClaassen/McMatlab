@@ -1,5 +1,6 @@
 function foundWords = findWords (loadedWords,searchedWords)
-%FINDWORDS Summary of this function goes here
+%FINDWORDS A function to split the Words and search for them separately
+%in the Database
 
     if ~ischar(searchedWords) || strcmp(searchedWords, '') || isempty(searchedWords)
         foundWords = true;

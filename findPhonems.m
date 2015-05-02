@@ -1,5 +1,6 @@
 function foundPhonems = findPhonems(loadedPhonems, searchedPhonems)
-%FINDPHONEMS Summary of this function goes here
+%FINDPHONEMS A function to split the Phonems and search for them separately 
+%in the Database
 
     if ~ischar(searchedPhonems) || strcmp(searchedPhonems, '') || isempty(searchedPhonems)
         foundPhonems = true;

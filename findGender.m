@@ -1,7 +1,7 @@
 function foundGender = findGender(loadedGender,searchedGender)
-%FINDGENDER Summary of this function goes here
+%FINDGENDER A function to search for the Gender of the Speakers in the
+%Database
 
-    
     if ~ischar(searchedGender) || strcmp(searchedGender, '') || isempty(searchedGender)
         foundGender = true;
     else
