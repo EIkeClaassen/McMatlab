@@ -112,8 +112,6 @@ classdef TIMIT_MIT_Database < handle
         function execute(obj)
             
         end
-        
     end
-    
 end
 
