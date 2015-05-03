@@ -16,10 +16,7 @@ classdef AudioPlayer
              obj.Filename = filename;
              obj.NBits = info.BitsPerSample;
              obj.Data = audioread(obj.Filename);
-        end
-        
-        function Player = createPlayer(obj)
-            Player = audioplayer(obj.Data,obj.Fs,obj.NBits);
+             obj.Player = audioplayer(obj.Data,obj.Fs,obj.NBits);
         end
     end
 end

@@ -3,9 +3,6 @@ function loadedDatabase = loadDatabase (direction)
 % Direction is typed in as a paramter. The return value is a cell array with
 % 160x6 cells.
 
-%global variable to use the loadedDatabase in the Searchfunction
-global database
-
 %Try and catch Block to handle some Exceptions
     try  
         if nargin == 0
@@ -17,15 +14,13 @@ global database
         %Uses variable Functions to create a 160x5 cell array
         writeFileDirection = saveFileDirection(inReadDatabase);
         writeGender = saveGender(inReadDatabase);
-        writePerson = saveSpeaker(inReadDatabase);
-        writeSentenceName = saveSentenceName(inReadDatabase);
-        writeSentence = saveSentence(inReadDatabase);
+        writePerson = savePerson(inReadDatabase);
+        writeSentenceID = saveSentenceID(inReadDatabase);
+        writeWords = saveWords(inReadDatabase);
         writePhonems = savePhonem(inReadDatabase);
         
         %Writes the variable Datas in one cell array
-        loadedDatabase = [writeFileDirection,writeGender,writePerson,writeSentenceName,writeSentence,writePhonems];
-      
-        database = loadedDatabase;
+        loadedDatabase = [writeFileDirection,writeGender,writePerson,writeSentenceID,writeWords,writePhonems];
         
     catch ME
         
