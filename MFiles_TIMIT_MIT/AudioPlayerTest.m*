@@ -1,0 +1,5 @@
+%% AudioPlayer should create a new audioplayer Obj
+f = AudioPlayer('test.wav', 44100);
+assert( exist('test.wav', 'file') == 2, 'File was not created')
+assert( f.Fs == 44100, 'Wrong Sample Rate')
+assert( f.Channels == 1, 'Wrong number of channels')
