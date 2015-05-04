@@ -1,6 +1,6 @@
 classdef TIMIT_MIT_Database < handle
-    %TESTDATABASE Summary of this class goes here
-    %   Detailed explanation goes here
+%TESTDATABASE Summary of this class goes here
+%Detailed explanation goes here
     
     
     properties (SetAccess = private)
@@ -77,6 +77,7 @@ classdef TIMIT_MIT_Database < handle
                     end
                     
                 catch e
+                    obj.Database = {};
                     switch obj.Mode
                         case 'gui'
                             obj.GUI.Handles.hDirInfo.String = 'Files not found';
@@ -86,6 +87,7 @@ classdef TIMIT_MIT_Database < handle
                             obj.GUI.Handles.hPlay.Enable = 'off';
                             obj.GUI.Handles.hStop.Enable = 'off';
                             obj.GUI.Handles.hFFT.Enable = 'off';
+                            obj.GUI.Handles.hConsole.Enable = 'off';
                         case 'console'
                             error('Invalid file identifier. The files (allfilelist.txt, allphonelist.txt, allsenlist.txt) were not found in this directory. The input has to be the directory of the "TIMIT MIT" folder.');
                         case 'dual'
@@ -98,10 +100,6 @@ classdef TIMIT_MIT_Database < handle
             function searchDatabase(obj, Gender, Person, SentenceID, Words, Phonems)
             %SEARCHDATABASE This Function searches after the given searchparameter. It
             %is possible to search in a combination of parameters.
-
-                %if ~(ischar(Gender)&&ischar(Person)&&ischar(SentenceID)&&ischar(Words)&&ischar(Phonems))
-                    %warning('All inputs have to be Strings. Wrong Inputs are treated as empty.');
-                %end
 
                 loadedDatabase = obj.Database;
                 resultingAudioFiles = {};
@@ -116,25 +114,30 @@ classdef TIMIT_MIT_Database < handle
             
                 switch obj.Mode
                     case 'gui'
+                        obj.GUI.Handles.hResults.Value = 1;
                         obj.GUI.Handles.hResults.String = obj.Results;
                     case 'console'
                         disp(obj.Results);
                     case 'dual'
                         disp(obj.Results);
+                        obj.GUI.Handles.hResults.Value = 1;
                         obj.GUI.Handles.hResults.String = obj.Results;
                 end
             
                 if isempty(obj.Results)
+                    obj.GUI.Handles.hResults.Value = 1;
                     obj.GUI.Handles.hResults.String = 'no results';
                     obj.GUI.Handles.hResults.Enable = 'inactive';
                     obj.GUI.Handles.hPlay.Enable = 'off';
                     obj.GUI.Handles.hStop.Enable = 'off';
                     obj.GUI.Handles.hFFT.Enable = 'off';
+                    obj.GUI.Handles.hConsole.Enable = 'off';
                 else
                     obj.GUI.Handles.hResults.Enable = 'on';
                     obj.GUI.Handles.hPlay.Enable = 'on';
                     obj.GUI.Handles.hStop.Enable = 'on';
                     obj.GUI.Handles.hFFT.Enable = 'on';
+                    obj.GUI.Handles.hConsole.Enable = 'on';
                 end
             end
 
@@ -161,13 +164,5 @@ classdef TIMIT_MIT_Database < handle
                 close(obj.GUI);
             end
         end
-    
-        methods (Access = private)
-        
-            function execute(obj)
-            
-            end
-        
-        end 
 end
 
