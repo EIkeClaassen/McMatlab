@@ -1,15 +1,3 @@
-
-#VERSION 1.1
-#TO DOs
-* Kap2. Was liegt wo? Was muss da überhaupt rein?
-+ Kap3. Benutzungsbeispiel hinzufügen
-+ Kap5. Installationshinweis überarbeiten?
-+ Rechtschreibung und Grammatik überpfüfen
-
-
-
-
-
 #Datenbank für den Zugriff auf die MIT/TIMIT-Datenbank erstellt in Matlab
 
 **Inhaltsanagbe dieser README Datei:**
@@ -23,17 +11,23 @@
 
 
 ##1. Projektbeschreibung
-Dieses Programm verwaltet die gegebene MIT/TIMIT-Datenbank. Die MIT/TIMIT-Datenbank besteht aus englischsprachigen Sätzen. Sie werden von 16 verschiedenen Sprechern unterschiedlichem Geschlechts dargeboten. Zu jedem Sprecher liegen 10 verschiedene Sätze vor. Einige Sätze kommen mehrfach vor. Zur weiteren Unterscheidung der Sätze sind Kriterien wie das Satzkürzel Kürzel (SentenceID), das Kürzel des Sprechers (Name), sein Geschlecht (Gender),
+Dieses Programm verwaltet die gegebene MIT/TIMIT-Datenbank. Die MIT/TIMIT-Datenbank besteht aus englischsprachigen Sätzen. Sie werden von 16 verschiedenen Sprechern unterschiedlichen Geschlechts dargeboten. Zu jedem Sprecher liegen 10 verschiedene Sätze vor. Einige Sätze kommen mehrfach vor. Zur weiteren Unterscheidung der Sätze sind Kriterien wie das Satzkürzel Kürzel (SentenceID), das Kürzel des Sprechers (Name), sein Geschlecht (Gender),
 die verwendeten Wörter (Word) und die vorkommenden Phoneme (Phone) gegeben.
 
-Dieses Programm bietet eine Suchfunktion. Der Nutzer kann nach einzelnen Kriterien, oder einer Kombination mehreren Kriterien suchen. Ausgegebenen Suchergebnisse können direkt wiedergegeben werden. Die Darstellung erfolgt in einem Guided User Interface (GUI).
+Dieses Programm bietet eine Suchfunktion. Der Nutzer kann nach einzelnen Kriterien, oder einer Kombination mehreren Kriterien suchen. Ausgegebene Suchergebnisse können direkt wiedergegeben werden. Die Darstellung erfolgt in einem Guided User Interface (GUI).
+
+Zur Auswertung der Files verfügt dieses Programm über eine STFT (Short Time Fourier Transform) Funktion.
 
 
 ##2. Was liegt wo
 
+Im Ordner MFiles_TIMIT_MIT liegen die Programmdateien und alle verwendeten Matlab Funktionen.
+Im Ordner TIMIT MIT ist die Datenbank hinterlegt.
 
 
-##3. Benutzungs-Beispiele
+##3. Benutzung und Beispiele
+
+###Handhabung
 Die Datenbank bietet folgende Suchparameter:
 * Kürzel des Sprechers
 * Geschlecht des Sprechers
@@ -41,19 +35,29 @@ Die Datenbank bietet folgende Suchparameter:
 * Verwendete Wörter
 * Verwendete Phoneme
 
-Im **Eingabefeld** kann der Nutzer den Pfad zur MIT/TMIT Datenbank angeben und sie mit dem **Load Data** Button einlesen. Befindet sich die Datenbank im von Matlab genutzten Ordner, kann das Laden der Datenbank ohne weitere Eingaben direkt über den **"Load Data"** Button erfolgen.
+Im **Eingabefeld** kann der Nutzer den Pfad zur MIT/TMIT Datenbank angeben. Der Pfad sollte bei der im Kapitel 5 beschriebenen Installation bereits korrekt gesetzt sein. Das korrekte Laden  der Datenbank wird über die Ausgabe **"Database successfully loaded"** bestätigt. Sollte ein Fehler vorliegen erscheint die Fehlermeldung **"Files not found"**.
 
-Der Nutzer kann nach einzelnen Parametern suchen, oder um die Suche zu spezifizieren Kombinationen mehrerer Parameter verwenden. Die Auswahl von **"Name"** und **"Gender"** sind mittels eines Dropdown Feldes möglich. Bei den Suchparamtern **"SentenceID"**, **"Word"** und **"Phone"** ist eine Mehrfachnennung möglich. Die Suchbegriffe müssen hier durch ein Komma getrennt
-werden.
+Der Nutzer kann nach einzelnen Parametern suchen, oder um die Suche zu spezifizieren Kombinationen mehrerer Parameter verwenden. Die Auswahl von **"Person"** und **"Gender"** sind mittels eines Dropdown Feldes möglich. Bei den Suchparametern **"SentenceID"**, **"Words"** und **"Phonems"** ist eine Mehrfachnennung möglich. Die Suchbegriffe müssen hier durch ein Komma ohne Leerzeichen getrennt werden. Eine Suche nach Wortfragmenten ist nicht möglich. Die Suche wird über den Button **"Search"** durchgeführt.
 
-Die Suchergebnisse werden im Fenster des GUI dargestellt. Der Nutzer kann hier einzelne Sätze auswählen und sie mittels des Buttons **"Play"** wiedergeben. Mit dem Button **"Stopp"** kann die Wiedergabe abgebrochen werden.
+Die Suchergebnisse werden im Fenster des GUI dargestellt. Der Nutzer kann hier einzelne Sätze auswählen und sie mittels des Buttons **"Play/Pause"** wiedergeben bzw. pausieren. Mit dem Button **"Stop"** kann die Wiedergabe abgebrochen werden.
 
-Beispiel:
+Mit dem Button **"STFT"** wird eine Short Time Fourier Transform durchgeführt und grafisch in einem separaten Fenster dargestellt. In ihr kann man die Sätze auf fehlerhafte Bereiche überprüfen. Das Rauschen wird hier als Balken mit
 
+Mittels des **"CWresults"** Buttons kann der Anwender die gefundenen Ergebnisse in ein Cell Array speichern. Dieses wird außerdem über die Konsole ausgegeben.
+
+
+###Beispiel
+Beispiel für SentenceID `sa2`
+
+Beispiel für die Mehfachnennung
+`she,wash,suit`
+
+Beispiel Words
+Bei der Suche nach dem Wort ´i´ werden nur Ergebnisse angezeigt, die das Wort "I" enthalten. Wörter die unter anderem ein "i" beinhalten werden nicht angezeigt.
 
 
 ##4. Dependencies
-Dieses Programm wurde erstellt und getesten mit MathWorks Matlab.
+Dieses Programm wurde erstellt und getest mit MathWorks Matlab.
 Die Lauffähigkeit wird gewährleistet für die Versionen:
 * Matlab 2014b
 * Matlab 2015a
@@ -89,8 +93,9 @@ nicht garantiert werden.
 Installationsreihenfolge
 1. Matlab installieren
 2. Alle notwendigen Matlab Dateien (siehe Punkt 4) sollten sich gemeinsam mit den TIMIT MIT Ordner in einem Verzeichnis befinden
-3. Via Matlab das erstellete Verzeichnis öffnen
-4. Mit der Datei **AudioSearch.fig** das Programm starten
+3. Via Matlab das erstellte Verzeichnis öffnen
+4. Die Datei **DatabaseGUI.m** aufrufen
+5.  In der Konsole wirde über die Eingabe von `TIMIT_MIT_Database();` das GUI gestartet
 
 Informationen zum Umgang mit dem Programm finden sich im Kapitel **3. Benutzungsbeispiele**
 
@@ -99,14 +104,22 @@ Informationen zum Umgang mit dem Programm finden sich im Kapitel **3. Benutzungs
 
 Dieses Programm wurde erstellt von:  
 
-    Saschs Bilert           6009917  
-    Eike Claaßen            6010410  
-    Jan Michel Grüttgen     6010074
+    Saschs Bilert         6009917  
+    Eike Claaßen          6010410  
+    Jan Michel Grütgen    6010074
 
 
 
 ##7. Lizenzhinweise
 
-Copyright (c) 2015 Sascha Bilert, Eike Claaßen, Jan-Michel Grüttgen  
+Copyright (c) 2015 Sascha Bilert, Eike Claaßen, Jan-Michel Grütgen  
 
-Hiermit wird unentgeltlich jeder Person, die eine Kopie der Software und der zugehörigen Dokumentationen (die "Software") erhält, die Erlaubnis erteilt, sie uneingeschränkt zu benutzen, inklusive und ohne Ausnahme dem Recht, sie zu verwenden, kopieren, ändern, fusionieren, verlegen, verbreiten, unterlizenzieren und/oder zu verkaufen, und Personen, die diese Software erhalten, diese Rechte zu geben, unter den folgenden Bedingungen: Der obige Urheberrechtsvermerk und dieser Erlaubnisvermerk sind in allen Kopien oder Teilkopien der Software beizulegen. DIE SOFTWARE WIRD OHNE JEDE AUSDRÜCKLICHE ODER IMPLIZIERTE GARANTIE BEREITGESTELLT, EINSCHLIESSLICH DER GARANTIE ZUR BENUTZUNG FÜR DEN VORGESEHENEN ODER EINEM BESTIMMTEN ZWECK SOWIE JEGLICHER RECHTSVERLETZUNG, JEDOCH NICHT DARAUF BESCHRÄNKT. IN KEINEM FALL SIND DIE AUTOREN ODER COPYRIGHTINHABER FÜR JEGLICHEN SCHADEN ODER SONSTIGE ANSPRÜCHE HAFTBAR ZU MACHEN, OB INFOLGE DER ERFÜLLUNG EINES VERTRAGES, EINES DELIKTES ODER ANDERS IM ZUSAMMENHANG MIT DER SOFTWARE ODER SONSTIGER VERWENDUNG DER SOFTWARE ENTSTANDEN.
+Hiermit wird unentgeltlich jeder Person, die eine Kopie der Software und der zugehörigen Dokumentationen (die "Software") erhält,
+die Erlaubnis erteilt, sie uneingeschränkt zu benutzen, inklusive und ohne Ausnahme dem Recht, sie zu verwenden, kopieren, ändern,
+fusionieren, verlegen, verbreiten, unterlizenzieren und/oder zu verkaufen, und Personen, die diese Software erhalten, diese Rechte
+zu geben, unter den folgenden Bedingungen:
+Der obige Urheberrechtsvermerk und dieser Erlaubnisvermerk sind in allen Kopien oder Teilkopien der Software beizulegen.
+DIE SOFTWARE WIRD OHNE JEDE AUSDRÜCKLICHE ODER IMPLIZIERTE GARANTIE BEREITGESTELLT, EINSCHLIESSLICH DER GARANTIE ZUR BENUTZUNG FÜR
+DEN VORGESEHENEN ODER EINEM BESTIMMTEN ZWECK SOWIE JEGLICHER RECHTSVERLETZUNG, JEDOCH NICHT DARAUF BESCHRÄNKT. IN KEINEM FALL SIND
+DIE AUTOREN ODER COPYRIGHTINHABER FÜR JEGLICHEN SCHADEN ODER SONSTIGE ANSPRÜCHE HAFTBAR ZU MACHEN, OB INFOLGE DER ERFÜLLUNG EINES
+VERTRAGES, EINES DELIKTES ODER ANDERS IM ZUSAMMENHANG MIT DER SOFTWARE ODER SONSTIGER VERWENDUNG DER SOFTWARE ENTSTANDEN.
