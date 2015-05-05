@@ -1,7 +1,7 @@
 #Datenbank für den Zugriff auf die MIT/TIMIT-Datenbank erstellt in Matlab
 
-**Inhaltsanagbe dieser README Datei:**
-1. Projektbeschribung
+**Inhaltsangabe dieser README Datei:**
+1. Projektbeschreibung
 2. Was liegt wo?
 3. Benutzungsbeispiele
 4. Dependencies
