@@ -58,11 +58,12 @@ classdef TIMIT_MIT_Database < handle
                 obj.Database = {};
                 obj.GUI.Handles.hDirInfo.String = 'Files not found';
                 obj.GUI.Handles.hSearch.Enable = 'off';
+                obj.GUI.Handles.hResults.Value = 1;
                 obj.GUI.Handles.hResults.String = 'no results';
                 obj.GUI.Handles.hResults.Enable = 'inactive';
                 obj.GUI.Handles.hPlay.Enable = 'off';
                 obj.GUI.Handles.hStop.Enable = 'off';
-                obj.GUI.Handles.hFFT.Enable = 'off';
+                obj.GUI.Handles.hSTFT.Enable = 'off';
                 obj.GUI.Handles.hConsole.Enable = 'off';
             end
         end
