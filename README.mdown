@@ -90,7 +90,7 @@ Jede Klasse verfügt über einen Hilfe-Text. Handles im GUI besitzen Tool-Tipp F
 
 Dieses Programm wurde erstellt von:  
 
-    Saschs Bilert         6009917  
+    Sascha Bilert         6009917  
     Eike Claaßen          6010410  
     Jan Michel Grütgen    6010074
 
