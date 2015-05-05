@@ -1,35 +1,97 @@
 classdef DatabaseGUI < handle
-    %UNTITLED Summary of this class goes here
-    %   Detailed explanation goes here
-    
+%DATABASEGUI The DatabaseGUI is a class with a builtin figure-function
+%(initializeGUI). This function creates a GUI which offers an easy handling
+%with the searchfunction of our Project.
+
+%---------------------------------------------------
+%
+%DatabaseGUI 
+%
+%The following functions are important to create our GUI.
+%
+%
+%List of functions used in the DatabaseGUI class:
+%
+%   - DatabaseGUI(databaseobj) constructor
+%   - initilaizeGUI(obj)
+%   - updateGUI(obj)
+%   - directoryCallback(obj)
+%   - searchCallback(obj)
+%   - resultsCallback(obj)
+%   - playCallback(obj)
+%   - stopCallback(obj)
+%   - STFTCallback(obj)
+%   - consoleCallback(obj)
+%
+%Handles to create the GUI:
+%   
+%   Background figure
+%
+%       -hFigure(Tag, TIMIT_MIT_DatabaseGUI)
+%
+%   List of figures:
+%   
+%       -hDirectory(edit)
+%       -hDirInfo(text)
+%       -hGenderText(text)
+%       -hGender(popupmenu)
+%       -hPersonText(text)
+%       -hPerson(popupmenu)
+%       -hSentenceIDText(text)
+%       -hSentenceID(edit)
+%       -hWordsText(text)
+%       -hWords(edit)
+%       -hPhonemsText(text)
+%       -hPhonems(edit)
+%       -hSearch(pushbutton)
+%       -hSTFT(pushbutton)
+%       -hConsole(pushbutton)
+%       -hResults(listbox)
+%       -hPlay(togglebutton)
+%       -hStop(pushbutton)
+% 
+% @autor Eike Claaßen, Jan-Michel Grüttgen, Sascha Bilert
+% @version 1.0 (Mai 2015)
+% 
+% Copyright © 2015 Eike Claaßen, Jan-Michel Grüttgen, Sascha Bilert
+% Using the MIT License
+%
+%---------------------------------------------------
+
     properties
+        
         Handles
         DatabaseObj
         currentAudio
+        
     end
-    
-    
+        
     methods
         
+        % Constructor of the class DatabaseGUI
         function obj =  DatabaseGUI(databaseObj)
             obj.DatabaseObj = databaseObj;
             obj.initializeGUI
             obj.updateGUI
         end
         
-        
+        % Create and then hide the UI as it is being constructed.
+        % Centering the Gui.
+        % Creating the components of our UI with sevaral styles.
+        % Align the Handles in the searchfields and descriptions of the
+        % searchfields.
         function initializeGUI(obj)
-            % Create and then hide the UI as it is being constructed.
+            
             hFigure = figure('Tag','TIMIT_MIT_DatabaseGUI',...
-                         'Visible','off',...
-                         'MenuBar','none',...
-                         'Resize','off',...
-                         'NumberTitle','off',...
-                         'Name','Search Audio Data',...
-                         'Position',[400 400 786 512]);
-            % Centering the Gui
+                             'Visible','off',...
+                             'MenuBar','none',...
+                             'Resize','off',...
+                             'NumberTitle','off',...
+                             'Name','Search Audio Data',...
+                             'Position',[400 400 786 512]);
+                     
             movegui(hFigure,'center');
-            % Construct the components.
+            
             hDirectory = uicontrol('Style','edit',...
                                 'Position',[50 450 250 30],...
                                 'String',obj.DatabaseObj.DefaultDirectory,...
@@ -130,7 +192,7 @@ classdef DatabaseGUI < handle
                                 'Tooltipstring','Short-Time-Fourier-Transform of the selected .wav-file',...
                                 'Callback',@(hObject,callbackdata,handles)obj.STFTCallback);
                             
-            hConsole = uicontrol('Style','pushbutton',...
+           hConsole = uicontrol('Style','pushbutton',...
                                 'FontName','Trebuchet',...
                                 'Enable','off',...
                                 'FontSize',13,...
@@ -168,7 +230,9 @@ classdef DatabaseGUI < handle
                               'String','Stop',...
                               'Tooltipstring','stop playing',...
                               'Callback',@(hObject,callbackdata,handles)obj.stopCallback);
-            align([hGenderText hPersonText hSentenceIDText hWordsText hPhonemsText],'distribute','middle');            
+                          
+            align([hGenderText hPersonText hSentenceIDText hWordsText hPhonemsText],'distribute','middle'); 
+            
             align([hGender hPerson hSentenceID hWords hPhonems],'distribute','bottom');
 
             obj.Handles = struct('hFigure',hFigure,...
@@ -180,14 +244,15 @@ classdef DatabaseGUI < handle
                              'hWords',hWords,...
                              'hPhonems',hPhonems,...
                              'hSearch',hSearch,...
-                             'hFFT',hSTFT,...
+                             'hSTFT',hSTFT,...
                              'hConsole',hConsole,...
                              'hResults',hResults,...
                              'hPlay',hPlay,...
                              'hStop',hStop);
         end
         
-        
+        %Checks wheather the directory was found or not. Updates the
+        %hDirInfo String and enable the search pushbutton.
         function updateGUI(obj)       
             if ~isempty(obj.DatabaseObj.Database)
                 obj.Handles.hDirInfo.String = 'Database successfully loaded';
@@ -196,12 +261,12 @@ classdef DatabaseGUI < handle
             obj.Handles.hFigure.Visible = 'on';
         end
         
-        
+        %Checks if the given directory is right or not.
         function directoryCallback(obj)
             obj.DatabaseObj.loadDatabase(obj.Handles.hDirectory.String);
         end
         
-        
+        %Uses the searched Values and triggers the corresponding function.
         function searchCallback(obj)
             gender = obj.Handles.hGender.String(obj.Handles.hGender.Value);
             switch gender{1}
@@ -217,13 +282,28 @@ classdef DatabaseGUI < handle
             obj.DatabaseObj.searchDatabase(gender, person{1}, sentenceID, words, phonems)
         end
         
-        
+        %If results were found enables the following pushbuttons:
+        %
+        %   - hPlay
+        %   - hStop
+        %   - hSTFT
+        %
+        %Safes the results in the var selectedDirectory and creates an
+        %AudioPlayer obj of the selected result.
         function resultsCallback(obj)
             selectedDirectory = obj.Handles.hResults.String(obj.Handles.hResults.Value);
             obj.currentAudio = AudioPlayer(selectedDirectory{1});
+            obj.Handles.hPlay.Enable = 'on';
+            obj.Handles.hStop.Enable = 'on';
+            obj.Handles.hSTFT.Enable = 'on';
         end
         
-        
+        %Creates and audioplayer obj to trigger the functions whiles 
+        %changing the Strings to the used function:
+        %
+        %   - play()
+        %   - resume()
+        %   - pause()
         function playCallback(obj)
             if  obj.Handles.hPlay.Value
                 set(obj.currentAudio.Player,'StopFcn',@(hObject,eventdata,handels)obj.stopCallback);
@@ -236,14 +316,15 @@ classdef DatabaseGUI < handle
             end
         end
         
-        
+        %Stops the current played audioplayer object.
         function stopCallback(obj)
             stop(obj.currentAudio.Player)
             obj.Handles.hPlay.String = 'Play';
             obj.Handles.hPlay.Value = 0;
         end
         
-        
+        %Creates a new figure within the STFT from the selected result.
+        %the window length is 0.005 and the overlap is 3%.
         function STFTCallback(obj)
             header = strcat('Kurzzeit-Fourier-Transformation von dir: ',obj.Handles.hResults.String(obj.Handles.hResults.Value));
             [mFrames, vTimeFrame] = Windowing(obj.currentAudio.Data, obj.currentAudio.Fs, 0.030, 0.005);
@@ -264,11 +345,11 @@ classdef DatabaseGUI < handle
             hfig.Visible = 'on';
         end
         
-        
+        %Saves the current results from the listbox in a cellarray (results)
+        %and displays the cellarray in the command window.
         function consoleCallback(obj)
             assignin('base','results',obj.DatabaseObj.Results);
             evalin('base','results');
-        end
-        
+        end    
     end
 end

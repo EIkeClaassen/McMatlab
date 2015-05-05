@@ -1,7 +1,18 @@
 function [ mSTFT, vFreq] = STFT( mFrames, dFs, vAnalysisWindow )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
-
+%STFT requires the mFrames of the Windowing function, the
+%SamplingFrequency of a selected .wav file and the analysed Windows.
+%
+%--------------------------------------
+%
+%Using the FFT function of matlab to create a STFT image.
+%
+% @autor Eike Claaßen, Jan-Michel Grüttgen, Sascha Bilert
+% @version 1.0 (Mai 2015)
+% 
+% Copyright © 2015 Eike Claaßen, Jan-Michel Grüttgen, Sascha Bilert
+% Using the MIT License
+%
+%--------------------------------------
 NFFT = length(vAnalysisWindow); 
 
     for i=1:size(mFrames,1);
