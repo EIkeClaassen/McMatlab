@@ -75,11 +75,12 @@ Das Programm umfasst folgende notwendige Files:
 Dieses Programm setzt die Installation von MathWorks Matlab **2014b** oder **2015a** voraus.
 
 Installationsreihenfolge
-1. Matlab installieren
-2. Alle notwendigen Matlab Dateien (siehe Punkt 4) sollten sich gemeinsam mit den TIMIT MIT Ordner in einem Verzeichnis befinden
-3. Via Matlab das erstellte Verzeichnis öffnen
-4. In den Ordner MFILES_TIMIT_MIT navigieren
-5. In der Konsole den Befehl `TIMIT_MIT_Database();` eingeben um das GUI zu starten
+
+1.  Matlab installieren
+2.  Alle notwendigen Matlab Dateien (siehe Punkt 4) sollten sich gemeinsam mit den TIMIT MIT Ordner in einem Verzeichnis befinden
+3.  Via Matlab das erstellte Verzeichnis öffnen
+4.  In den Ordner MFILES_TIMIT_MIT navigieren
+5.  In der Konsole den Befehl `TIMIT_MIT_Database();` eingeben um das GUI zu starten
 
 Informationen zum Umgang mit dem Programm finden sich im Kapitel **3. Benutzungsbeispiele**
 
