@@ -72,8 +72,7 @@ Das Programm umfasst folgende notwendige Files:
 * TMIT_MIT_DatabaseTest.m (Script)
 
 ##5. Installationshinweise
-Dieses Programm setzt die Installation von MathWorks Matlab **2014b** oder **2015a**. Für andere Versionen kann die Funktion
-nicht garantiert werden.
+Dieses Programm setzt die Installation von MathWorks Matlab **2014b** oder **2015a** vorraus.
 
 Installationsreihenfolge
 1. Matlab installieren
