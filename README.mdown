@@ -58,8 +58,7 @@ Bei der Suche nach dem Wort "I" werden nur Ergebnisse angezeigt, die das Wort "I
 
 
 ##4. Dependencies
-Dieses Programm wurde erstellt und getest mit MathWorks Matlab.
-Die Lauffähigkeit wird gewährleistet für die Versionen:
+Dieses Programm wurde erstellt und getest mit MathWorks Matlab in den Versionen:
 * Matlab 2014b
 * Matlab 2015a
 
