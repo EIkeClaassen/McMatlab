@@ -12,17 +12,18 @@
 
 ##1. Projektbeschreibung
 Dieses Programm verwaltet die gegebene MIT/TIMIT-Datenbank. Die MIT/TIMIT-Datenbank besteht aus englischsprachigen Sätzen. Sie werden von 16 verschiedenen Sprechern unterschiedlichen Geschlechts dargeboten. Zu jedem Sprecher liegen 10 verschiedene Sätze vor. Einige Sätze kommen mehrfach vor. Zur weiteren Unterscheidung der Sätze sind Kriterien wie das Satzkürzel Kürzel (SentenceID), das Kürzel des Sprechers (Name), sein Geschlecht (Gender),
-die verwendeten Wörter (Word) und die vorkommenden Phoneme (Phone) gegeben.
+die verwendeten Wörter (Word) und die vorkommenden Phoneme (Phonems) gegeben.
 
 Dieses Programm bietet eine Suchfunktion. Der Nutzer kann nach einzelnen Kriterien, oder einer Kombination mehreren Kriterien suchen. Ausgegebene Suchergebnisse können direkt wiedergegeben werden. Die Darstellung erfolgt in einem Guided User Interface (GUI).
 
-Zur Auswertung der Files verfügt dieses Programm über eine STFT (Short Time Fourier Transform) Funktion.
+Zur grafischen Auswertung der Files verfügt dieses Programm über eine STFT (Short Time Fourier Transform) Funktion.
 
 
 ##2. Was liegt wo
 
-Im Ordner MFiles_TIMIT_MIT liegen die Programmdateien und alle verwendeten Matlab Funktionen.
-Im Ordner TIMIT MIT ist die Datenbank hinterlegt.
+Im Ordner *MFiles_TIMIT_MIT* liegen die Programmdateien und alle verwendeten Matlab Funktionen und Klassen.
+
+Im Ordner *TIMIT MIT* ist die Datenbank hinterlegt.
 
 
 ##3. Benutzung und Beispiele
@@ -35,25 +36,25 @@ Die Datenbank bietet folgende Suchparameter:
 * Verwendete Wörter
 * Verwendete Phoneme
 
-Im **Eingabefeld** kann der Nutzer den Pfad zur MIT/TMIT Datenbank angeben. Der Pfad sollte bei der im Kapitel 5 beschriebenen Installation bereits korrekt gesetzt sein. Das korrekte Laden  der Datenbank wird über die Ausgabe **"Database successfully loaded"** bestätigt. Sollte ein Fehler vorliegen erscheint die Fehlermeldung **"Files not found"**.
+Im **Eingabefeld** kann der Nutzer den Pfad zur MIT/TMIT Datenbank angeben. Wenn dieser nicht angegeben wird, verwendet das Programm eine DefaultDirectory (../TIMIT MIT/). Der Pfad sollte bei der im Kapitel 5 beschriebenen Installation bereits korrekt gesetzt sein. Das korrekte Laden  der Datenbank wird über die Ausgabe **"Database successfully loaded"** bestätigt. Sollte ein Fehler vorliegen erscheint die Statusmeldung **"Files not found"**.
 
-Der Nutzer kann nach einzelnen Parametern suchen, oder um die Suche zu spezifizieren Kombinationen mehrerer Parameter verwenden. Die Auswahl von **"Person"** und **"Gender"** sind mittels eines Dropdown Feldes möglich. Bei den Suchparametern **"SentenceID"**, **"Words"** und **"Phonems"** ist eine Mehrfachnennung möglich. Die Suchbegriffe müssen hier durch ein Komma ohne Leerzeichen getrennt werden. Eine Suche nach Wortfragmenten ist nicht möglich. Die Suche wird über den Button **"Search"** durchgeführt.
+Der Nutzer kann nach einzelnen Parametern suchen, oder um die Suche zu spezifizieren Kombinationen mehrerer Parameter verwenden. Die Auswahl von **"Person"** und **"Gender"** sind mittels eines Dropdown Feldes möglich. Bei den Suchparametern **"Words"** und **"Phonems"** ist eine Mehrfachnennung möglich. Die Suchbegriffe müssen hier durch ein Komma getrennt werden. Eine Suche nach Wortfragmenten ist nicht möglich. Die Suche wird über den Button **"Search"** durchgeführt.
 
-Die Suchergebnisse werden im Fenster des GUI dargestellt. Der Nutzer kann hier einzelne Sätze auswählen und sie mittels des Buttons **"Play/Pause"** wiedergeben bzw. pausieren. Mit dem Button **"Stop"** kann die Wiedergabe abgebrochen werden.
+Die Suchergebnisse werden im ListBox-Fenster des GUI dargestellt. Der Nutzer kann hier einzelne Sätze auswählen und sie mittels des Buttons **"Play/Pause/Resume"** wiedergeben bzw. pausieren. Mit dem Button **"Stop"** kann die Wiedergabe abgebrochen werden.
 
-Mit dem Button **"STFT"** wird eine Short Time Fourier Transform durchgeführt und grafisch in einem separaten Fenster dargestellt. In ihr kann man die Sätze auf fehlerhafte Bereiche überprüfen. Das Rauschen wird hier als Balken mit
+Mit dem Button **"STFT"** wird eine Short Time Fourier Transform durchgeführt und grafisch in einem separaten Fenster dargestellt. In ihr kann man die Sätze auf fehlerhafte Bereiche überprüfen. Das Rauschen wird hier in der Regel als Balken mit einer hohen gleichmäßig Leistungsdichte über den gesammten Frequenzbereich dargestellt.
 
-Mittels des **"CWresults"** Buttons kann der Anwender die gefundenen Ergebnisse in ein Cell Array speichern. Dieses wird außerdem über die Konsole ausgegeben.
+Mittels des **"CWresults"** Buttons kann der Anwender die gefundenen Ergebnisse im Base-Workspace in das Cell Array *"results"* speichern. Die Ergebnisse werden außerdem über die Konsole ausgegeben.
 
 
 ###Beispiel
-Beispiel für SentenceID `sa2`
+1. **Beispiel für SentenceID**: `sa2`
 
-Beispiel für die Mehfachnennung
-`she,wash,suit`
+2. **Beispiele für die Mehfachnennung**:
+`she,wash,suit`; `she , wash , suit`;`she, wash, suit`;
 
-Beispiel Words
-Bei der Suche nach dem Wort ´i´ werden nur Ergebnisse angezeigt, die das Wort "I" enthalten. Wörter die unter anderem ein "i" beinhalten werden nicht angezeigt.
+3. **Beispiel Words**:
+Bei der Suche nach dem Wort "I" werden nur Ergebnisse angezeigt, die das Wort "I" enthalten. Wörter die unter anderem ein "i" beinhalten werden nicht angezeigt.
 
 
 ##4. Dependencies
@@ -63,28 +64,13 @@ Die Lauffähigkeit wird gewährleistet für die Versionen:
 * Matlab 2015a
 
 Das Programm umfasst folgende notwendige Files:
-* AudioFile.m
-* AudfioFileTest.m
-* AudioSearch.fig
-* AudioSearch.m
-* findGender.m
-* findPerson.m
-* findPhonems.m
-* findSentenceID.m
-* findWord.m
-* loadDatabase.m
-* loadDatabaseTest.m
-* readDatabase.m
-* saveFileDirection.m
-* saveGender.m
-* savePhonemen.m
-* saveSentence.m
-* saveSentenceName.m
-* saveSpeaker.m
-* searchDatabase.m
-* searchDatabaseTest.m
-
-
+* AudioPlayer.m (Class)
+* AudioPlayerTest.m (Script)
+* DatabaseGUI.m (Class)
+* STFT.m (Function)
+* Windowing.m (Function)
+* TMIT_MIT_Database.m (Class)
+* TMIT_MIT_DatabaseTest.m (Script)
 
 ##5. Installationshinweise
 Dieses Programm setzt die Installation von MathWorks Matlab **2014b** oder **2015a**. Für andere Versionen kann die Funktion
@@ -94,10 +80,12 @@ Installationsreihenfolge
 1. Matlab installieren
 2. Alle notwendigen Matlab Dateien (siehe Punkt 4) sollten sich gemeinsam mit den TIMIT MIT Ordner in einem Verzeichnis befinden
 3. Via Matlab das erstellte Verzeichnis öffnen
-4. Die Datei **DatabaseGUI.m** aufrufen
-5.  In der Konsole wirde über die Eingabe von `TIMIT_MIT_Database();` das GUI gestartet
+4. In den Ordner MFILES_TIMIT_MIT navigieren
+5. In der Konsole den Befehl `TIMIT_MIT_Database();` eingeben um das GUI zu starten
 
 Informationen zum Umgang mit dem Programm finden sich im Kapitel **3. Benutzungsbeispiele**
+
+Jede Klasse verfügt über einen Hilfe-Text. Handles im GUI besitzen Tool-Tipp Fenster.
 
 
 ##6. Autoren
@@ -112,7 +100,7 @@ Dieses Programm wurde erstellt von:
 
 ##7. Lizenzhinweise
 
-Copyright (c) 2015 Sascha Bilert, Eike Claaßen, Jan-Michel Grütgen  
+Copyright (c) 2015 Sascha Bilert, Eike Claaßen, Jan-Michel Grüttgen  
 
 Hiermit wird unentgeltlich jeder Person, die eine Kopie der Software und der zugehörigen Dokumentationen (die "Software") erhält,
 die Erlaubnis erteilt, sie uneingeschränkt zu benutzen, inklusive und ohne Ausnahme dem Recht, sie zu verwenden, kopieren, ändern,
