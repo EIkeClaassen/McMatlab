@@ -92,7 +92,7 @@ Dieses Programm wurde erstellt von:
 
     Sascha Bilert         6009917  
     Eike Claaßen          6010410  
-    Jan Michel Grütgen    6010074
+    Jan-Michel Grüttgen   6010074
 
 
 
