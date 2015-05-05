@@ -11,8 +11,8 @@
 
 
 ##1. Projektbeschreibung
-Dieses Programm verwaltet die gegebene MIT/TIMIT-Datenbank. Die MIT/TIMIT-Datenbank besteht aus englischsprachigen Sätzen. Sie werden von 16 verschiedenen Sprechern unterschiedlichen Geschlechts dargeboten. Zu jedem Sprecher liegen 10 verschiedene Sätze vor. Einige Sätze kommen mehrfach vor. Zur weiteren Unterscheidung der Sätze sind Kriterien wie das Satzkürzel Kürzel (SentenceID), das Kürzel des Sprechers (Name), sein Geschlecht (Gender),
-die verwendeten Wörter (Word) und die vorkommenden Phoneme (Phonems) gegeben.
+Dieses Programm verwaltet die gegebene MIT/TIMIT-Datenbank. Die MIT/TIMIT-Datenbank besteht aus englischsprachigen Sätzen. Sie werden von 16 verschiedenen Sprechern unterschiedlichen Geschlechts dargeboten. Zu jedem Sprecher liegen 10 verschiedene Sätze vor. Einige Sätze kommen mehrfach vor. Zur weiteren Unterscheidung der Sätze sind Kriterien wie das Satzkürzel (SentenceID), das Kürzel des Sprechers (Name), sein Geschlecht (Gender),
+die verwendeten Wörter (Words) und die vorkommenden Phoneme (Phonems) gegeben.
 
 Dieses Programm bietet eine Suchfunktion. Der Nutzer kann nach einzelnen Kriterien, oder einer Kombination mehreren Kriterien suchen. Ausgegebene Suchergebnisse können direkt wiedergegeben werden. Die Darstellung erfolgt in einem Guided User Interface (GUI).
 
